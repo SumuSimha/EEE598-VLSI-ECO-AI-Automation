@@ -1,0 +1,11 @@
+module arith_unit (
+    input [7:0] a,
+    input [7:0] b,
+    output [7:0] sum,
+    output [7:0] xor_out
+);
+    // Correct Implementation
+    assign sum = a + b;
+    assign xor_out = a ^ b;
+
+endmodule
