@@ -1,7 +1,9 @@
 import subprocess
 import os
 import sys
+import re
 
+# --- 1. Dual-Logging Setup ---
 class Logger(object):
     def __init__(self, filename):
         self.terminal = sys.stdout
@@ -16,88 +18,100 @@ class Logger(object):
         pass
 
 def start_arith_eco_cycle():
-    # 1. Path Setup - Targeting the Downloads folder
-    # This finds your Windows Downloads folder automatically
-    user_profile = os.environ['USERPROFILE']
-    base_path = os.path.join(user_profile, "Downloads", "Auto_VLSI")
+    # --- 2. Path Setup ---
+    # Automatically finds the directory where this .py file is saved
+    base_path = os.path.dirname(os.path.abspath(__file__))
     
-    # Ensure the project folder exists in Downloads
-    if not os.path.exists(base_path):
-        print(f"[ERROR] Folder not found at {base_path}")
-        print("Please move your 'Auto_VLSI' folder to your Downloads folder first.")
-        return
-
-    log_file_path = os.path.join(base_path, "repair_session_log.txt")
+    # Initialize Logger
+    log_file_path = os.path.join(base_path, "final_repair_log.txt")
     sys.stdout = Logger(log_file_path)
 
+    # Define tool paths
     golden_rtl = os.path.normpath(os.path.join(base_path, "golden_rtl", "arith_unit.v"))
     buggy_net = os.path.normpath(os.path.join(base_path, "buggy_netlist", "arith_unit_bug.v"))
-    testbench = os.path.normpath(os.path.join(base_path, "tb", "tb_arith_unit.v"))
     output_dir = os.path.normpath(os.path.join(base_path, "patched_netlist"))
-    lib_file = os.path.normpath(os.path.join(base_path, "lib", "std_cells.v")) 
-
+    
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    print(f"[INFO] Initializing Arithmetic Unit ECO Cycle...")
-    print(f"[INFO] Working Directory: {base_path}")
+    print(f"--- STARTING ECO REPAIR SESSION ---")
+    print(f"[INFO] Project Path: {base_path}")
 
-    # 2. Hardened Instruction - Forcing a direct file write
+    # --- 3. Robust Hybrid Instruction ---
+    # We provide a strict template to prevent the AI from "chatting" too much
     instruction = (
-        f"TASK: Perform an ECO repair. "
-        f"1. Read the buggy file at \"{buggy_net}\". "
-        f"2. Apply these fixes: In 'xor_out', swap indices so [7:4] and [3:0] are mapped correctly. In 'sum', change '&' to '+'. "
-        f"3. DIRECTIVE: Create the file \"{output_dir}\\arith_unit_patched.v\" and write the full corrected Verilog code into it. "
-        f"4. VERIFY: Run 'iverilog -o sim.out \"{testbench}\" \"{output_dir}\\arith_unit_patched.v\" \"{lib_file}\"' "
-        f"and then run 'vvp sim.out'. Report the simulation results."
+        f"ACT AS A VLSI ECO AGENT. "
+        f"1. Compare Reference: {golden_rtl} and Buggy: {buggy_net}. "
+        f"2. Fix the sum bit-slice '&' to '+' and swap the xor_out nibbles. "
+        f"3. MANDATORY: Print the fixed Verilog module exactly like this: "
+        f"---FIXED_CODE_START--- "
+        f"[Full Verilog Module Here] "
+        f"---FIXED_CODE_END--- "
     )
 
+    # --- 4. Command Construction (Fixed with Trust Flags) ---
     cmd_list = [
         "codex", "exec", 
         "--full-auto", 
-        "--skip-git-repo-check",
-        "--sandbox", "none",  # Using 'none' to allow the agent to write to your disk
+        "--skip-git-repo-check", # Essential for running outside of Git
         f"\"{instruction}\""
     ]
-    
     cmd_string = " ".join(cmd_list)
 
-    process = None
     try:
-        print("[STATUS] Running repair cycle...")
-        process = subprocess.Popen(
-            cmd_string, 
-            stdout=subprocess.PIPE, 
-            stderr=subprocess.STDOUT, 
-            text=True,
-            shell=True,
-            encoding='utf-8',
-            errors='replace'
-        )
+        print("[STATUS] Invoking AI Agent for Logic Analysis...")
+        # Capture both stdout and stderr
+        result = subprocess.run(cmd_string, capture_output=True, text=True, shell=True, encoding='utf-8')
         
-        if process.stdout:
-            for line in process.stdout:
-                print(f"[AGENT] {line.strip()}")
+        # Display the Raw Output for the Log
+        print("\n=== RAW AGENT OUTPUT ===")
+        if result.stdout:
+            print(result.stdout)
+        if result.stderr:
+            print(f"CLI NOTIFICATION/ERROR: {result.stderr}")
+        print("========================\n")
+
+        # --- 5. Python-Side Extraction ---
+        # Search for markers (Case-Insensitive)
+        pattern = r"---FIXED_CODE_START---(.*?)---FIXED_CODE_END---"
+        match = re.search(pattern, result.stdout, re.DOTALL | re.IGNORECASE)
+
+        if match:
+            fixed_verilog = match.group(1).strip()
             
-        process.wait()
-        
-        # 3. Final Verification check
-        import time
-        time.sleep(1) # Give the OS a second to index the new file
-        expected_file = os.path.join(output_dir, "arith_unit_patched.v")
-        
-        print("-" * 60)
-        if os.path.exists(expected_file):
-            print(f"[SUCCESS] Patched netlist found at: {expected_file}")
+            # Remove any markdown code fences the AI might have added
+            fixed_verilog = fixed_verilog.replace("```verilog", "").replace("```", "").strip()
+            
+            patch_path = os.path.join(output_dir, "arith_unit_patched.v")
+            
+            with open(patch_path, "w") as f:
+                f.write(fixed_verilog)
+            
+            print(f"[SUCCESS] Python extracted and saved the patch to: {patch_path}")
+            
+            # --- 6. Local Verification (Icarus Verilog) ---
+            print("[STATUS] Running Icarus Verilog Simulation...")
+            testbench = os.path.join(base_path, "tb", "tb_arith_unit.v")
+            lib = os.path.join(base_path, "lib", "std_cells.v")
+            
+            # Construct shell command for Windows
+            verify_cmd = f"iverilog -o sim.out \"{testbench}\" \"{patch_path}\" \"{lib}\" && vvp sim.out"
+            v_result = subprocess.run(verify_cmd, shell=True, capture_output=True, text=True)
+            
+            print("\n=== SIMULATION RESULTS ===")
+            if v_result.stdout:
+                print(v_result.stdout)
+            if v_result.stderr:
+                print(f"SIMULATION LOG/ERROR: {v_result.stderr}")
+            print("==========================\n")
+            
         else:
-            print(f"[ERROR] Agent failed to write to disk. Check permissions for: {output_dir}")
-        print("-" * 60)
+            print("[ERROR] AI did not provide code markers correctly. Extraction failed.")
 
     except Exception as e:
-        print(f"[FATAL] Orchestrator Error: {str(e)}")
-    finally:
-        if process and process.stdout:
-            process.stdout.close()
+        print(f"[FATAL ERROR] {str(e)}")
+
+    print(f"--- SESSION COMPLETE. ALL LOGS SAVED TO {log_file_path} ---")
 
 if __name__ == "__main__":
     start_arith_eco_cycle()
