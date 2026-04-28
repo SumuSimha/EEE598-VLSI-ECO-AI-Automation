@@ -1,0 +1,17 @@
+Top module: bitmix_unit_a
+Buggy source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case13_bitmix_upper_slice\buggy_netlist\bitmix_unit_a_bug.v
+Golden source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case13_bitmix_upper_slice\golden_rtl\bitmix_unit_a.v
+Output count: buggy=4 golden=4
+Assignment count: buggy=3 golden=3
+Suspicious outputs: masked_lo, parity, upper_xor
+Cone differences: (none)
+Likely reconstructed intent:
+- upper_xor (score=5)
+  buggy : upper_xor = (data ^ mask)
+  golden: upper_xor = (data ^ mask)
+- masked_lo (score=5)
+  buggy : masked_lo = (data & mask)
+  golden: masked_lo = (data & mask)
+- parity (score=5)
+  buggy : parity = (Uxor data)
+  golden: parity = (Uxor data)

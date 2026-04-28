@@ -1,0 +1,11 @@
+Top module: mux3_unit_a
+Buggy source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case19_mux_three_way\buggy_netlist\mux3_unit_a_bug.v
+Golden source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case19_mux_three_way\golden_rtl\mux3_unit_a.v
+Output count: buggy=2 golden=2
+Assignment count: buggy=1 golden=1
+Suspicious outputs: out
+Cone differences: out
+Likely reconstructed intent:
+- out (score=13)
+  buggy : out = ((sel == 2'd0) ? a : ((sel == 2'd1) ? c : b))
+  golden: out = ((sel == 2'd0) ? a : ((sel == 2'd1) ? b : c))

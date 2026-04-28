@@ -1,0 +1,11 @@
+Top module: compare_unit_b
+Buggy source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case10_compare_gt\buggy_netlist\compare_unit_b_bug.v
+Golden source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case10_compare_gt\golden_rtl\compare_unit_b.v
+Output count: buggy=5 golden=5
+Assignment count: buggy=3 golden=3
+Suspicious outputs: gt
+Cone differences: gt
+Likely reconstructed intent:
+- gt (score=10)
+  buggy : gt = (a GreaterEq b)
+  golden: gt = (a > b)

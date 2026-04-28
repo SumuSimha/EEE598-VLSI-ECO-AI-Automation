@@ -1,0 +1,163 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2009.vpi";
+S_00000218e3b36020 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_00000218e3b38cd0 .scope module, "tb_bitmix_unit_b" "tb_bitmix_unit_b" 3 3;
+ .timescale -9 -12;
+L_00000218e3b4b160 .functor XOR 8, L_00000218e3b9b1b0, L_00000218e3b9bd90, C4<00000000>, C4<00000000>;
+L_00000218e3b4b2b0 .functor AND 8, L_00000218e3b9be30, L_00000218e3b9b250, C4<11111111>, C4<11111111>;
+v00000218e3b9b7f0_0 .net *"_ivl_1", 7 0, L_00000218e3b9b1b0;  1 drivers
+v00000218e3b9bc50_0 .net *"_ivl_3", 7 0, L_00000218e3b9bd90;  1 drivers
+v00000218e3b9bf70_0 .net *"_ivl_7", 7 0, L_00000218e3b9be30;  1 drivers
+v00000218e3b9bcf0_0 .net *"_ivl_9", 7 0, L_00000218e3b9b250;  1 drivers
+v00000218e3b9bed0_0 .var "data", 15 0;
+v00000218e3b9b4d0_0 .net "expected_masked_lo", 7 0, L_00000218e3b4b2b0;  1 drivers
+v00000218e3b9b070_0 .net "expected_parity", 0 0, L_00000218e3b9b610;  1 drivers
+v00000218e3b9b750_0 .net "expected_upper_xor", 7 0, L_00000218e3b4b160;  1 drivers
+v00000218e3b9ba70_0 .var "mask", 15 0;
+v00000218e3b9b570_0 .net "masked_lo", 7 0, L_00000218e3b4b390;  1 drivers
+v00000218e3b9b110_0 .var/i "mismatches", 31 0;
+v00000218e3b9b430_0 .net "parity", 0 0, L_00000218e3b9b9d0;  1 drivers
+v00000218e3b9b6b0_0 .net "upper_xor", 7 0, L_00000218e3b4b320;  1 drivers
+L_00000218e3b9b1b0 .part v00000218e3b9bed0_0, 8, 8;
+L_00000218e3b9bd90 .part v00000218e3b9ba70_0, 8, 8;
+L_00000218e3b9be30 .part v00000218e3b9bed0_0, 0, 8;
+L_00000218e3b9b250 .part v00000218e3b9ba70_0, 0, 8;
+L_00000218e3b9b610 .reduce/xor v00000218e3b9bed0_0;
+S_00000218e3b38e60 .scope module, "uut" "bitmix_unit_b" 3 18, 4 1 0, S_00000218e3b38cd0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 16 "data";
+    .port_info 1 /INPUT 16 "mask";
+    .port_info 2 /OUTPUT 8 "upper_xor";
+    .port_info 3 /OUTPUT 8 "masked_lo";
+    .port_info 4 /OUTPUT 1 "parity";
+L_00000218e3b4b320 .functor XOR 8, L_00000218e3b9b890, L_00000218e3b9b930, C4<00000000>, C4<00000000>;
+L_00000218e3b4b390 .functor AND 8, L_00000218e3b9cee0, L_00000218e3b9cf80, C4<11111111>, C4<11111111>;
+v00000218e3b38260_0 .net *"_ivl_1", 7 0, L_00000218e3b9b890;  1 drivers
+v00000218e3b38300_0 .net *"_ivl_11", 7 0, L_00000218e3b9cf80;  1 drivers
+v00000218e3b365f0_0 .net *"_ivl_3", 7 0, L_00000218e3b9b930;  1 drivers
+v00000218e3b36690_0 .net *"_ivl_9", 7 0, L_00000218e3b9cee0;  1 drivers
+v00000218e3b39930_0 .net "data", 15 0, v00000218e3b9bed0_0;  1 drivers
+v00000218e3b9bb10_0 .net "mask", 15 0, v00000218e3b9ba70_0;  1 drivers
+v00000218e3b9b2f0_0 .net "masked_lo", 7 0, L_00000218e3b4b390;  alias, 1 drivers
+v00000218e3b9b390_0 .net "parity", 0 0, L_00000218e3b9b9d0;  alias, 1 drivers
+v00000218e3b9bbb0_0 .net "upper_xor", 7 0, L_00000218e3b4b320;  alias, 1 drivers
+L_00000218e3b9b890 .part v00000218e3b9bed0_0, 8, 8;
+L_00000218e3b9b930 .part v00000218e3b9ba70_0, 8, 8;
+L_00000218e3b9b9d0 .reduce/xor v00000218e3b9bed0_0;
+L_00000218e3b9cee0 .part v00000218e3b9bed0_0, 0, 8;
+L_00000218e3b9cf80 .part v00000218e3b9ba70_0, 0, 8;
+    .scope S_00000218e3b38cd0;
+T_0 ;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v00000218e3b9b110_0, 0, 32;
+    %pushi/vec4 3855, 0, 16;
+    %store/vec4 v00000218e3b9bed0_0, 0, 16;
+    %pushi/vec4 13107, 0, 16;
+    %store/vec4 v00000218e3b9ba70_0, 0, 16;
+    %delay 1000, 0;
+    %load/vec4 v00000218e3b9b6b0_0;
+    %load/vec4 v00000218e3b9b750_0;
+    %cmp/ne;
+    %jmp/1 T_0.3, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v00000218e3b9b570_0;
+    %load/vec4 v00000218e3b9b4d0_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.3;
+    %jmp/1 T_0.2, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v00000218e3b9b430_0;
+    %load/vec4 v00000218e3b9b070_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.2;
+    %jmp/0xz  T_0.0, 6;
+    %load/vec4 v00000218e3b9b110_0;
+    %addi 1, 0, 32;
+    %store/vec4 v00000218e3b9b110_0, 0, 32;
+    %vpi_call/w 3 33 "$display", "Case 1 mismatch", " upper_xor=%h expected=%h", " masked_lo=%h expected=%h", " parity=%h expected=%h", v00000218e3b9b6b0_0, v00000218e3b9b750_0, v00000218e3b9b570_0, v00000218e3b9b4d0_0, v00000218e3b9b430_0, v00000218e3b9b070_0 {0 0 0};
+T_0.0 ;
+    %pushi/vec4 65535, 0, 16;
+    %store/vec4 v00000218e3b9bed0_0, 0, 16;
+    %pushi/vec4 255, 0, 16;
+    %store/vec4 v00000218e3b9ba70_0, 0, 16;
+    %delay 1000, 0;
+    %load/vec4 v00000218e3b9b6b0_0;
+    %load/vec4 v00000218e3b9b750_0;
+    %cmp/ne;
+    %jmp/1 T_0.7, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v00000218e3b9b570_0;
+    %load/vec4 v00000218e3b9b4d0_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.7;
+    %jmp/1 T_0.6, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v00000218e3b9b430_0;
+    %load/vec4 v00000218e3b9b070_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.6;
+    %jmp/0xz  T_0.4, 6;
+    %load/vec4 v00000218e3b9b110_0;
+    %addi 1, 0, 32;
+    %store/vec4 v00000218e3b9b110_0, 0, 32;
+    %vpi_call/w 3 40 "$display", "Case 2 mismatch", " upper_xor=%h expected=%h", " masked_lo=%h expected=%h", " parity=%h expected=%h", v00000218e3b9b6b0_0, v00000218e3b9b750_0, v00000218e3b9b570_0, v00000218e3b9b4d0_0, v00000218e3b9b430_0, v00000218e3b9b070_0 {0 0 0};
+T_0.4 ;
+    %pushi/vec4 4660, 0, 16;
+    %store/vec4 v00000218e3b9bed0_0, 0, 16;
+    %pushi/vec4 17185, 0, 16;
+    %store/vec4 v00000218e3b9ba70_0, 0, 16;
+    %delay 1000, 0;
+    %load/vec4 v00000218e3b9b6b0_0;
+    %load/vec4 v00000218e3b9b750_0;
+    %cmp/ne;
+    %jmp/1 T_0.11, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v00000218e3b9b570_0;
+    %load/vec4 v00000218e3b9b4d0_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.11;
+    %jmp/1 T_0.10, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v00000218e3b9b430_0;
+    %load/vec4 v00000218e3b9b070_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.10;
+    %jmp/0xz  T_0.8, 6;
+    %load/vec4 v00000218e3b9b110_0;
+    %addi 1, 0, 32;
+    %store/vec4 v00000218e3b9b110_0, 0, 32;
+    %vpi_call/w 3 47 "$display", "Case 3 mismatch", " upper_xor=%h expected=%h", " masked_lo=%h expected=%h", " parity=%h expected=%h", v00000218e3b9b6b0_0, v00000218e3b9b750_0, v00000218e3b9b570_0, v00000218e3b9b4d0_0, v00000218e3b9b430_0, v00000218e3b9b070_0 {0 0 0};
+T_0.8 ;
+    %load/vec4 v00000218e3b9b110_0;
+    %cmpi/e 0, 0, 32;
+    %jmp/0xz  T_0.12, 4;
+    %vpi_call/w 3 50 "$display", "[SUCCESS] All vectors matched" {0 0 0};
+    %jmp T_0.13;
+T_0.12 ;
+    %vpi_call/w 3 52 "$display", "[MISMATCH] Total mismatches: %0d", v00000218e3b9b110_0 {0 0 0};
+T_0.13 ;
+    %vpi_call/w 3 53 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "-";
+    "C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case14_bitmix_mask_op\tb\tb_bitmix_unit_b.v";
+    "C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case14_bitmix_mask_op\patched_netlist\bitmix_unit_b_patched_2.v";

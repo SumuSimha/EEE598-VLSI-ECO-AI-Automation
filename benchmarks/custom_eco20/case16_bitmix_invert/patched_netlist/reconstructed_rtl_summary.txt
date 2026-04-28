@@ -1,0 +1,11 @@
+Top module: bitmix_unit_d
+Buggy source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case16_bitmix_invert\buggy_netlist\bitmix_unit_d_bug.v
+Golden source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case16_bitmix_invert\golden_rtl\bitmix_unit_d.v
+Output count: buggy=2 golden=2
+Assignment count: buggy=2 golden=2
+Suspicious outputs: upper_inv
+Cone differences: upper_inv
+Likely reconstructed intent:
+- upper_inv (score=8)
+  buggy : upper_inv = data
+  golden: upper_inv = (Unot <pyverilog.vparser.ast.Partselect object at 0x00000236786185E0>)

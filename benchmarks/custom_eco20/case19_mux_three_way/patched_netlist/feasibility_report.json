@@ -1,0 +1,10 @@
+{
+  "title": "ECO Feasibility Report",
+  "status": "PATCH_POSSIBLE",
+  "supported_mode": "assign-level-combinational",
+  "confidence": 90,
+  "reason": "The design matches the supported combinational repair flow",
+  "details": [
+    "Patch generation will use Codex plus simulation-guided verification on suspicious outputs."
+  ]
+}

@@ -1,0 +1,11 @@
+Top module: bitmix_unit_c
+Buggy source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case15_bitmix_parity\buggy_netlist\bitmix_unit_c_bug.v
+Golden source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case15_bitmix_parity\golden_rtl\bitmix_unit_c.v
+Output count: buggy=4 golden=4
+Assignment count: buggy=3 golden=3
+Suspicious outputs: parity
+Cone differences: parity
+Likely reconstructed intent:
+- parity (score=9)
+  buggy : parity = (Uxor mask)
+  golden: parity = (Uxor data)

@@ -1,0 +1,11 @@
+Top module: arith_unit_c
+Buggy source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case03_arith_sub\buggy_netlist\arith_unit_c_bug.v
+Golden source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case03_arith_sub\golden_rtl\arith_unit_c.v
+Output count: buggy=2 golden=2
+Assignment count: buggy=2 golden=2
+Suspicious outputs: sum
+Cone differences: sum
+Likely reconstructed intent:
+- sum (score=9)
+  buggy : sum = (a - b)
+  golden: sum = (a + b)

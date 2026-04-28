@@ -1,0 +1,11 @@
+Top module: shift_unit_a
+Buggy source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case17_shift_left\buggy_netlist\shift_unit_a_bug.v
+Golden source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case17_shift_left\golden_rtl\shift_unit_a.v
+Output count: buggy=2 golden=2
+Assignment count: buggy=2 golden=2
+Suspicious outputs: left_shift
+Cone differences: left_shift
+Likely reconstructed intent:
+- left_shift (score=10)
+  buggy : left_shift = (data Srl sh)
+  golden: left_shift = (data Sll sh)

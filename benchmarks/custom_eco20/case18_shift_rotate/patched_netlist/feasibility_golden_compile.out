@@ -1,0 +1,127 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2009.vpi";
+S_0000017b9f646e70 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0000017b9f649280 .scope module, "tb_shift_unit_b" "tb_shift_unit_b" 3 3;
+ .timescale -9 -12;
+v0000017b9f6597c0_0 .net *"_ivl_1", 6 0, L_0000017b9f653e40;  1 drivers
+v0000017b9f659860_0 .net *"_ivl_3", 0 0, L_0000017b9f653300;  1 drivers
+v0000017b9f6540c0_0 .net *"_ivl_7", 0 0, L_0000017b9f653ee0;  1 drivers
+v0000017b9f653440_0 .net *"_ivl_9", 6 0, L_0000017b9f6533a0;  1 drivers
+v0000017b9f653da0_0 .var "data", 7 0;
+v0000017b9f6538a0_0 .net "expected_rotl1", 7 0, L_0000017b9f653d00;  1 drivers
+v0000017b9f654160_0 .net "expected_rotr1", 7 0, L_0000017b9f6536c0;  1 drivers
+v0000017b9f6534e0_0 .var/i "mismatches", 31 0;
+v0000017b9f653580_0 .net "rotl1", 7 0, L_0000017b9f653f80;  1 drivers
+v0000017b9f653620_0 .net "rotr1", 7 0, L_0000017b9f653940;  1 drivers
+L_0000017b9f653e40 .part v0000017b9f653da0_0, 0, 7;
+L_0000017b9f653300 .part v0000017b9f653da0_0, 7, 1;
+L_0000017b9f653d00 .concat [ 1 7 0 0], L_0000017b9f653300, L_0000017b9f653e40;
+L_0000017b9f653ee0 .part v0000017b9f653da0_0, 0, 1;
+L_0000017b9f6533a0 .part v0000017b9f653da0_0, 1, 7;
+L_0000017b9f6536c0 .concat [ 7 1 0 0], L_0000017b9f6533a0, L_0000017b9f653ee0;
+S_0000017b9f649a90 .scope module, "uut" "shift_unit_b" 3 14, 4 1 0, S_0000017b9f649280;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 8 "data";
+    .port_info 1 /OUTPUT 8 "rotl1";
+    .port_info 2 /OUTPUT 8 "rotr1";
+v0000017b9f647c50_0 .net *"_ivl_1", 6 0, L_0000017b9f653bc0;  1 drivers
+v0000017b9f647440_0 .net *"_ivl_3", 0 0, L_0000017b9f654200;  1 drivers
+v0000017b9f649410_0 .net *"_ivl_7", 0 0, L_0000017b9f653760;  1 drivers
+v0000017b9f60bc60_0 .net *"_ivl_9", 6 0, L_0000017b9f653c60;  1 drivers
+v0000017b9f649c20_0 .net "data", 7 0, v0000017b9f653da0_0;  1 drivers
+v0000017b9f649cc0_0 .net "rotl1", 7 0, L_0000017b9f653f80;  alias, 1 drivers
+v0000017b9f649d60_0 .net "rotr1", 7 0, L_0000017b9f653940;  alias, 1 drivers
+L_0000017b9f653bc0 .part v0000017b9f653da0_0, 0, 7;
+L_0000017b9f654200 .part v0000017b9f653da0_0, 7, 1;
+L_0000017b9f653f80 .concat [ 1 7 0 0], L_0000017b9f654200, L_0000017b9f653bc0;
+L_0000017b9f653760 .part v0000017b9f653da0_0, 0, 1;
+L_0000017b9f653c60 .part v0000017b9f653da0_0, 1, 7;
+L_0000017b9f653940 .concat [ 7 1 0 0], L_0000017b9f653c60, L_0000017b9f653760;
+    .scope S_0000017b9f649280;
+T_0 ;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0000017b9f6534e0_0, 0, 32;
+    %pushi/vec4 129, 0, 8;
+    %store/vec4 v0000017b9f653da0_0, 0, 8;
+    %delay 1000, 0;
+    %load/vec4 v0000017b9f653580_0;
+    %load/vec4 v0000017b9f6538a0_0;
+    %cmp/ne;
+    %jmp/1 T_0.2, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v0000017b9f653620_0;
+    %load/vec4 v0000017b9f654160_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.2;
+    %jmp/0xz  T_0.0, 6;
+    %load/vec4 v0000017b9f6534e0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0000017b9f6534e0_0, 0, 32;
+    %vpi_call/w 3 26 "$display", "Case 1 mismatch", " rotl1=%h expected=%h", " rotr1=%h expected=%h", v0000017b9f653580_0, v0000017b9f6538a0_0, v0000017b9f653620_0, v0000017b9f654160_0 {0 0 0};
+T_0.0 ;
+    %pushi/vec4 60, 0, 8;
+    %store/vec4 v0000017b9f653da0_0, 0, 8;
+    %delay 1000, 0;
+    %load/vec4 v0000017b9f653580_0;
+    %load/vec4 v0000017b9f6538a0_0;
+    %cmp/ne;
+    %jmp/1 T_0.5, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v0000017b9f653620_0;
+    %load/vec4 v0000017b9f654160_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.5;
+    %jmp/0xz  T_0.3, 6;
+    %load/vec4 v0000017b9f6534e0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0000017b9f6534e0_0, 0, 32;
+    %vpi_call/w 3 32 "$display", "Case 2 mismatch", " rotl1=%h expected=%h", " rotr1=%h expected=%h", v0000017b9f653580_0, v0000017b9f6538a0_0, v0000017b9f653620_0, v0000017b9f654160_0 {0 0 0};
+T_0.3 ;
+    %pushi/vec4 165, 0, 8;
+    %store/vec4 v0000017b9f653da0_0, 0, 8;
+    %delay 1000, 0;
+    %load/vec4 v0000017b9f653580_0;
+    %load/vec4 v0000017b9f6538a0_0;
+    %cmp/ne;
+    %jmp/1 T_0.8, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v0000017b9f653620_0;
+    %load/vec4 v0000017b9f654160_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.8;
+    %jmp/0xz  T_0.6, 6;
+    %load/vec4 v0000017b9f6534e0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0000017b9f6534e0_0, 0, 32;
+    %vpi_call/w 3 38 "$display", "Case 3 mismatch", " rotl1=%h expected=%h", " rotr1=%h expected=%h", v0000017b9f653580_0, v0000017b9f6538a0_0, v0000017b9f653620_0, v0000017b9f654160_0 {0 0 0};
+T_0.6 ;
+    %load/vec4 v0000017b9f6534e0_0;
+    %cmpi/e 0, 0, 32;
+    %jmp/0xz  T_0.9, 4;
+    %vpi_call/w 3 41 "$display", "[SUCCESS] All vectors matched" {0 0 0};
+    %jmp T_0.10;
+T_0.9 ;
+    %vpi_call/w 3 43 "$display", "[MISMATCH] Total mismatches: %0d", v0000017b9f6534e0_0 {0 0 0};
+T_0.10 ;
+    %vpi_call/w 3 44 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "-";
+    "C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case18_shift_rotate\tb\tb_shift_unit_b.v";
+    "C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case18_shift_rotate\golden_rtl\shift_unit_b.v";

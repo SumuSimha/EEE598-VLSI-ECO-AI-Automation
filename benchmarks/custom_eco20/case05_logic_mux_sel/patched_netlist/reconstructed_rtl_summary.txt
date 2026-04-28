@@ -1,0 +1,11 @@
+Top module: logic_unit_a
+Buggy source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case05_logic_mux_sel\buggy_netlist\logic_unit_a_bug.v
+Golden source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case05_logic_mux_sel\golden_rtl\logic_unit_a.v
+Output count: buggy=3 golden=3
+Assignment count: buggy=3 golden=3
+Suspicious outputs: mux_out
+Cone differences: mux_out
+Likely reconstructed intent:
+- mux_out (score=10)
+  buggy : mux_out = (sel ? b : a)
+  golden: mux_out = (sel ? a : b)

@@ -1,0 +1,11 @@
+Top module: arith_unit_d
+Buggy source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case04_arith_xor_zero\buggy_netlist\arith_unit_d_bug.v
+Golden source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case04_arith_xor_zero\golden_rtl\arith_unit_d.v
+Output count: buggy=2 golden=2
+Assignment count: buggy=2 golden=2
+Suspicious outputs: xor_out
+Cone differences: xor_out
+Likely reconstructed intent:
+- xor_out (score=8)
+  buggy : xor_out = 8'h00
+  golden: xor_out = (a ^ b)

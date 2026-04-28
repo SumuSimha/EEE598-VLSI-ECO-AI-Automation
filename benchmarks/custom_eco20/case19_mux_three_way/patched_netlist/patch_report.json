@@ -1,0 +1,60 @@
+{
+  "title": "ECO Patch Report",
+  "status": "PATCH_APPLIED",
+  "supported_mode": "assign-level-combinational",
+  "confidence": 90,
+  "reason": "Patch generated and verified against the golden baseline",
+  "details": [
+    "Patch generation will use Codex plus simulation-guided verification on suspicious outputs.",
+    "Reconstructed RTL summary: C:\\Users\\sumuk\\OneDrive\\Desktop\\Auto_VLSI\\benchmarks\\custom_eco20\\case19_mux_three_way\\patched_netlist\\reconstructed_rtl_summary.txt",
+    "Reconstructed RTL candidate: C:\\Users\\sumuk\\OneDrive\\Desktop\\Auto_VLSI\\benchmarks\\custom_eco20\\case19_mux_three_way\\patched_netlist\\reconstructed_rtl_candidate.v"
+  ],
+  "bug_summary": {
+    "bug_type": "mux-select or conditional-expression mismatch",
+    "affected_outputs": [
+      "out"
+    ],
+    "changed_signals": [
+      "out"
+    ],
+    "ranked_bug_candidates": [
+      {
+        "signal": "out",
+        "score": 13
+      }
+    ],
+    "explanation": "The buggy netlist differed from the golden design on 1 suspicious outputs and was patched within the supported assign-level-combinational flow."
+  },
+  "changed_lines": [
+    {
+      "tag": "replace",
+      "before_start": 8,
+      "before_end": 8,
+      "after_start": 8,
+      "after_end": 9,
+      "before_lines": [
+        "    assign out = (sel == 2'd0) ? a : ((sel == 2'd1) ? c : b);"
+      ],
+      "after_lines": [
+        "    ",
+        "    assign out = (sel == 2'd0) ? a : ((sel == 2'd1) ? b : c);"
+      ]
+    }
+  ],
+  "verification": {
+    "passed": true,
+    "summary": "[SUCCESS] All vectors matched\nC:\\Users\\sumuk\\OneDrive\\Desktop\\Auto_VLSI\\benchmarks\\custom_eco20\\case19_mux_three_way\\tb\\tb_mux3_unit_a.v:55: $finish called at 3000 (1ps)"
+  },
+  "minimality": {
+    "edit_hunks": 1,
+    "changed_line_count": 3,
+    "changed_signal_count": 1
+  },
+  "execution_summary": {
+    "executor": "heuristic",
+    "selected_strategy": "replace_mismatched_outputs",
+    "strategy_attempts": 3,
+    "successful_candidates": 3,
+    "syntax_attempts_for_selected_candidate": 1
+  }
+}

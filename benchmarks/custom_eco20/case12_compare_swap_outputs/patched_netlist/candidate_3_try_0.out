@@ -1,0 +1,147 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2009.vpi";
+S_000002dfafa15a00 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_000002dfafa19080 .scope module, "tb_compare_unit_d" "tb_compare_unit_d" 3 3;
+ .timescale -9 -12;
+v000002dfafa19c90_0 .var "a", 7 0;
+v000002dfafa2ab90_0 .var "b", 7 0;
+v000002dfafa2ac30_0 .net "eq", 0 0, L_000002dfafa79660;  1 drivers
+v000002dfafa2acd0_0 .net "expected_eq", 0 0, L_000002dfafae64f0;  1 drivers
+v000002dfafa2ad70_0 .net "expected_gt", 0 0, L_000002dfafae6450;  1 drivers
+v000002dfafa2ae10_0 .net "expected_lt", 0 0, L_000002dfafae6590;  1 drivers
+v000002dfafa2aeb0_0 .net "gt", 0 0, L_000002dfafa78a80;  1 drivers
+v000002dfafa2af50_0 .net "lt", 0 0, L_000002dfafa795c0;  1 drivers
+v000002dfafae63b0_0 .var/i "mismatches", 31 0;
+L_000002dfafae6450 .cmp/gt 8, v000002dfafa19c90_0, v000002dfafa2ab90_0;
+L_000002dfafae64f0 .cmp/eq 8, v000002dfafa19c90_0, v000002dfafa2ab90_0;
+L_000002dfafae6590 .cmp/gt 8, v000002dfafa2ab90_0, v000002dfafa19c90_0;
+S_000002dfafa199c0 .scope module, "uut" "compare_unit_d" 3 18, 4 1 0, S_000002dfafa19080;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 8 "a";
+    .port_info 1 /INPUT 8 "b";
+    .port_info 2 /OUTPUT 1 "gt";
+    .port_info 3 /OUTPUT 1 "eq";
+    .port_info 4 /OUTPUT 1 "lt";
+v000002dfafa19210_0 .net "a", 7 0, v000002dfafa19c90_0;  1 drivers
+v000002dfafaeaa50_0 .net "b", 7 0, v000002dfafa2ab90_0;  1 drivers
+v000002dfafaea010_0 .net "eq", 0 0, L_000002dfafa79660;  alias, 1 drivers
+v000002dfafa19b50_0 .net "gt", 0 0, L_000002dfafa78a80;  alias, 1 drivers
+v000002dfafa19bf0_0 .net "lt", 0 0, L_000002dfafa795c0;  alias, 1 drivers
+L_000002dfafa79660 .cmp/eq 8, v000002dfafa19c90_0, v000002dfafa2ab90_0;
+L_000002dfafa78a80 .cmp/gt 8, v000002dfafa19c90_0, v000002dfafa2ab90_0;
+L_000002dfafa795c0 .cmp/gt 8, v000002dfafa2ab90_0, v000002dfafa19c90_0;
+    .scope S_000002dfafa19080;
+T_0 ;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v000002dfafae63b0_0, 0, 32;
+    %pushi/vec4 254, 0, 8;
+    %store/vec4 v000002dfafa19c90_0, 0, 8;
+    %pushi/vec4 1, 0, 8;
+    %store/vec4 v000002dfafa2ab90_0, 0, 8;
+    %delay 1000, 0;
+    %load/vec4 v000002dfafa2aeb0_0;
+    %load/vec4 v000002dfafa2ad70_0;
+    %cmp/ne;
+    %jmp/1 T_0.3, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v000002dfafa2ac30_0;
+    %load/vec4 v000002dfafa2acd0_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.3;
+    %jmp/1 T_0.2, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v000002dfafa2af50_0;
+    %load/vec4 v000002dfafa2ae10_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.2;
+    %jmp/0xz  T_0.0, 6;
+    %load/vec4 v000002dfafae63b0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v000002dfafae63b0_0, 0, 32;
+    %vpi_call/w 3 33 "$display", "Case 1 mismatch", " gt=%h expected=%h", " eq=%h expected=%h", " lt=%h expected=%h", v000002dfafa2aeb0_0, v000002dfafa2ad70_0, v000002dfafa2ac30_0, v000002dfafa2acd0_0, v000002dfafa2af50_0, v000002dfafa2ae10_0 {0 0 0};
+T_0.0 ;
+    %pushi/vec4 1, 0, 8;
+    %store/vec4 v000002dfafa19c90_0, 0, 8;
+    %pushi/vec4 254, 0, 8;
+    %store/vec4 v000002dfafa2ab90_0, 0, 8;
+    %delay 1000, 0;
+    %load/vec4 v000002dfafa2aeb0_0;
+    %load/vec4 v000002dfafa2ad70_0;
+    %cmp/ne;
+    %jmp/1 T_0.7, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v000002dfafa2ac30_0;
+    %load/vec4 v000002dfafa2acd0_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.7;
+    %jmp/1 T_0.6, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v000002dfafa2af50_0;
+    %load/vec4 v000002dfafa2ae10_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.6;
+    %jmp/0xz  T_0.4, 6;
+    %load/vec4 v000002dfafae63b0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v000002dfafae63b0_0, 0, 32;
+    %vpi_call/w 3 40 "$display", "Case 2 mismatch", " gt=%h expected=%h", " eq=%h expected=%h", " lt=%h expected=%h", v000002dfafa2aeb0_0, v000002dfafa2ad70_0, v000002dfafa2ac30_0, v000002dfafa2acd0_0, v000002dfafa2af50_0, v000002dfafa2ae10_0 {0 0 0};
+T_0.4 ;
+    %pushi/vec4 51, 0, 8;
+    %store/vec4 v000002dfafa19c90_0, 0, 8;
+    %pushi/vec4 51, 0, 8;
+    %store/vec4 v000002dfafa2ab90_0, 0, 8;
+    %delay 1000, 0;
+    %load/vec4 v000002dfafa2aeb0_0;
+    %load/vec4 v000002dfafa2ad70_0;
+    %cmp/ne;
+    %jmp/1 T_0.11, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v000002dfafa2ac30_0;
+    %load/vec4 v000002dfafa2acd0_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.11;
+    %jmp/1 T_0.10, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v000002dfafa2af50_0;
+    %load/vec4 v000002dfafa2ae10_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.10;
+    %jmp/0xz  T_0.8, 6;
+    %load/vec4 v000002dfafae63b0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v000002dfafae63b0_0, 0, 32;
+    %vpi_call/w 3 47 "$display", "Case 3 mismatch", " gt=%h expected=%h", " eq=%h expected=%h", " lt=%h expected=%h", v000002dfafa2aeb0_0, v000002dfafa2ad70_0, v000002dfafa2ac30_0, v000002dfafa2acd0_0, v000002dfafa2af50_0, v000002dfafa2ae10_0 {0 0 0};
+T_0.8 ;
+    %load/vec4 v000002dfafae63b0_0;
+    %cmpi/e 0, 0, 32;
+    %jmp/0xz  T_0.12, 4;
+    %vpi_call/w 3 50 "$display", "[SUCCESS] All vectors matched" {0 0 0};
+    %jmp T_0.13;
+T_0.12 ;
+    %vpi_call/w 3 52 "$display", "[MISMATCH] Total mismatches: %0d", v000002dfafae63b0_0 {0 0 0};
+T_0.13 ;
+    %vpi_call/w 3 53 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "-";
+    "C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case12_compare_swap_outputs\tb\tb_compare_unit_d.v";
+    "C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case12_compare_swap_outputs\patched_netlist\compare_unit_d_patched_3.v";

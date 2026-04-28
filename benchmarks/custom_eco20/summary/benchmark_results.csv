@@ -1,0 +1,21 @@
+case,passed,returncode,duration_sec,feasibility_status,supported_mode,strategy_attempts,syntax_attempts,successful_candidates,selected_strategy,executor,bug_type,affected_outputs,changed_signals,edit_hunks,changed_line_count,changed_signal_count
+case01_arith_lower_add,True,0,5.3,PATCH_POSSIBLE,assign-level-combinational,1,1,1,replace_mismatched_outputs,heuristic,bit-slice or bus-range mismatch,"sum,xor_out","sum,sum[3:0],sum[7:4]",1,4,3
+case02_arith_xor_swap,True,0,5.74,PATCH_POSSIBLE,assign-level-combinational,1,1,1,replace_mismatched_outputs,heuristic,bit-slice or bus-range mismatch,"sum,xor_out","xor_out,xor_out[3:0],xor_out[7:4]",2,4,3
+case03_arith_sub,True,0,6.25,PATCH_POSSIBLE,assign-level-combinational,3,1,3,replace_mismatched_outputs,heuristic,operator or datapath expression mismatch,sum,sum,2,3,1
+case04_arith_xor_zero,True,0,6.01,PATCH_POSSIBLE,assign-level-combinational,3,1,3,replace_mismatched_outputs,heuristic,operator or datapath expression mismatch,xor_out,xor_out,2,3,1
+case05_logic_mux_sel,True,0,4.61,PATCH_POSSIBLE,assign-level-combinational,3,1,3,replace_mismatched_outputs,heuristic,mux-select or conditional-expression mismatch,mux_out,mux_out,2,3,1
+case06_logic_or_and,True,0,4.56,PATCH_POSSIBLE,assign-level-combinational,3,1,3,replace_mismatched_outputs,heuristic,operator or datapath expression mismatch,or_out,or_out,3,3,1
+case07_logic_nand_polarity,True,0,6.07,PATCH_POSSIBLE,assign-level-combinational,3,1,3,replace_mismatched_outputs,heuristic,inversion or polarity mismatch,nand_out,nand_out,2,3,1
+case08_logic_const,True,0,6.36,PATCH_POSSIBLE,assign-level-combinational,3,1,3,replace_mismatched_outputs,heuristic,mux-select or conditional-expression mismatch,"mix_out,pass_out",pass_out,1,3,1
+case09_compare_eq,True,0,7.07,PATCH_POSSIBLE,assign-level-combinational,3,1,3,replace_mismatched_outputs,heuristic,output-driver mismatch,eq,eq,3,3,1
+case10_compare_gt,True,0,4.42,PATCH_POSSIBLE,assign-level-combinational,3,1,3,replace_mismatched_outputs,heuristic,output-driver mismatch,gt,gt,2,3,1
+case11_compare_lt_swap,True,0,4.79,PATCH_POSSIBLE,assign-level-combinational,3,1,3,replace_mismatched_outputs,heuristic,output-driver mismatch,lt,lt,2,3,1
+case12_compare_swap_outputs,True,0,5.66,PATCH_POSSIBLE,assign-level-combinational,3,1,3,replace_mismatched_outputs,heuristic,output-driver mismatch,"gt,lt","gt,lt",2,5,2
+case13_bitmix_upper_slice,True,0,5.69,PATCH_POSSIBLE,assign-level-combinational,1,1,1,replace_mismatched_outputs,heuristic,bit-slice or bus-range mismatch,"masked_lo,parity,upper_xor",upper_xor,1,3,1
+case14_bitmix_mask_op,True,0,7.2,PATCH_POSSIBLE,assign-level-combinational,3,1,3,replace_mismatched_outputs,heuristic,bit-slice or bus-range mismatch,masked_lo,masked_lo,3,3,1
+case15_bitmix_parity,True,0,6.17,PATCH_POSSIBLE,assign-level-combinational,3,1,3,replace_mismatched_outputs,heuristic,operator or datapath expression mismatch,parity,parity,2,3,1
+case16_bitmix_invert,True,0,8.06,PATCH_POSSIBLE,assign-level-combinational,3,1,3,replace_mismatched_outputs,heuristic,inversion or polarity mismatch,upper_inv,upper_inv,2,3,1
+case17_shift_left,True,0,5.6,PATCH_POSSIBLE,assign-level-combinational,3,1,3,replace_mismatched_outputs,heuristic,output-driver mismatch,left_shift,left_shift,2,3,1
+case18_shift_rotate,True,0,4.46,PATCH_POSSIBLE,assign-level-combinational,3,1,3,replace_mismatched_outputs,heuristic,bit-slice or bus-range mismatch,"rotl1,rotr1",rotl1,1,3,1
+case19_mux_three_way,True,0,5.11,PATCH_POSSIBLE,assign-level-combinational,3,1,3,replace_mismatched_outputs,heuristic,mux-select or conditional-expression mismatch,out,out,1,3,1
+case20_checksum_slice,True,0,5.79,PATCH_POSSIBLE,assign-level-combinational,1,1,1,replace_mismatched_outputs,heuristic,bit-slice or bus-range mismatch,"checksum,folded",checksum,1,3,1

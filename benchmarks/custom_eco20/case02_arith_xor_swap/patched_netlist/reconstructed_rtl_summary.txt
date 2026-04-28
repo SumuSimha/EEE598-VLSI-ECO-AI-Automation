@@ -1,0 +1,14 @@
+Top module: arith_unit_b
+Buggy source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case02_arith_xor_swap\buggy_netlist\arith_unit_b_bug.v
+Golden source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case02_arith_xor_swap\golden_rtl\arith_unit_b.v
+Output count: buggy=2 golden=2
+Assignment count: buggy=3 golden=2
+Suspicious outputs: sum, xor_out
+Cone differences: (none)
+Likely reconstructed intent:
+- xor_out (score=5)
+  buggy : xor_out = (a ^ b) | xor_out = (a ^ b)
+  golden: xor_out = (a ^ b)
+- sum (score=5)
+  buggy : sum = (a + b)
+  golden: sum = (a + b)

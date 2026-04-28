@@ -1,0 +1,14 @@
+Top module: logic_unit_d
+Buggy source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case08_logic_const\buggy_netlist\logic_unit_d_bug.v
+Golden source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case08_logic_const\golden_rtl\logic_unit_d.v
+Output count: buggy=2 golden=2
+Assignment count: buggy=2 golden=2
+Suspicious outputs: mix_out, pass_out
+Cone differences: mix_out, pass_out
+Likely reconstructed intent:
+- mix_out (score=15)
+  buggy : mix_out = ((a & b) | (<pyverilog.vparser.ast.Repeat object at 0x000002535092EB30> & a))
+  golden: mix_out = ((a & b) | (<pyverilog.vparser.ast.Repeat object at 0x00000253506024D0> & a))
+- pass_out (score=8)
+  buggy : pass_out = 8'hFF
+  golden: pass_out = (sel ? a : b)

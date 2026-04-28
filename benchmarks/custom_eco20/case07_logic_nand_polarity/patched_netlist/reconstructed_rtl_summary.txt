@@ -1,0 +1,11 @@
+Top module: logic_unit_c
+Buggy source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case07_logic_nand_polarity\buggy_netlist\logic_unit_c_bug.v
+Golden source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case07_logic_nand_polarity\golden_rtl\logic_unit_c.v
+Output count: buggy=2 golden=2
+Assignment count: buggy=2 golden=2
+Suspicious outputs: nand_out
+Cone differences: nand_out
+Likely reconstructed intent:
+- nand_out (score=9)
+  buggy : nand_out = (a & b)
+  golden: nand_out = (Unot (And a b))

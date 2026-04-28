@@ -1,0 +1,43 @@
+[INFO] Project root: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case14_bitmix_mask_op
+[INFO] Project label: default
+[INFO] Golden RTL: bitmix_unit_b.v
+[INFO] Buggy netlist: bitmix_unit_b_bug.v
+[INFO] Testbench: tb_bitmix_unit_b.v
+[INFO] Library files: 0
+[INFO] Library search dirs (-y): 0
+[INFO] Golden design file count: 1
+[INFO] Buggy design style: assign_level
+[INFO] Feasibility status: PATCH_POSSIBLE
+[INFO] Feasibility reason: The design matches the supported combinational repair flow
+[INFO] Feasibility confidence: 90
+[INFO] Feasibility reports: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case14_bitmix_mask_op\patched_netlist\feasibility_report.json, C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case14_bitmix_mask_op\patched_netlist\feasibility_report.md
+[INFO] Top module: bitmix_unit_b
+[INFO] Suspicious outputs:
+  - masked_lo
+[INFO] Structural mismatch summary:
+  - Output expression mismatch for masked_lo: buggy='(data | mask)' golden='(data & mask)'
+[INFO] Backward cone of influence (3 signals): data, mask, masked_lo
+[INFO] Differing assignments inside suspicious cone:
+  - masked_lo
+[STATUS] Running golden reference simulation...
+[INFO] Golden simulation baseline:
+[SUCCESS] All vectors matched
+C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case14_bitmix_mask_op\tb\tb_bitmix_unit_b.v:53: $finish called at 3000 (1ps)
+[INFO] Reconstructed RTL summary: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case14_bitmix_mask_op\patched_netlist\reconstructed_rtl_summary.txt
+[INFO] Reconstructed RTL candidate: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case14_bitmix_mask_op\patched_netlist\reconstructed_rtl_candidate.v
+[INFO] Agent architecture: planner=python executor=heuristic-assign-rewrite verifier=iverilog/vvp
+[STATUS] Trying strategy 1: replace_mismatched_outputs
+[INFO] Candidate target count: 1
+[INFO] Passing candidate minimality: hunks=3 lines=3 signals=1
+[STATUS] Trying strategy 2: replace_differing_assigns_in_cone
+[INFO] Candidate target count: 1
+[INFO] Passing candidate minimality: hunks=3 lines=3 signals=1
+[STATUS] Trying strategy 3: replace_all_differing_assigns
+[INFO] Candidate target count: 1
+[INFO] Passing candidate minimality: hunks=3 lines=3 signals=1
+[SUCCESS] Repaired netlist written to C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case14_bitmix_mask_op\patched_netlist\bitmix_unit_b_patched.v
+[INFO] Selected minimal passing patch: hunks=3 lines=3 signals=1
+[INFO] Patch reports: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case14_bitmix_mask_op\patched_netlist\patch_report.json, C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case14_bitmix_mask_op\patched_netlist\patch_report.md
+[INFO] Matching simulation transcript:
+[SUCCESS] All vectors matched
+C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case14_bitmix_mask_op\tb\tb_bitmix_unit_b.v:53: $finish called at 3000 (1ps)

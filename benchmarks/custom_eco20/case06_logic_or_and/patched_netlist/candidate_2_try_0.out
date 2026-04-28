@@ -1,0 +1,156 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2009.vpi";
+S_000002354ab15ee0 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_000002354ab18a10 .scope module, "tb_logic_unit_b" "tb_logic_unit_b" 3 3;
+ .timescale -9 -12;
+L_000002354ab2ac20 .functor AND 8, v000002354ab19740_0, v000002354ab19880_0, C4<11111111>, C4<11111111>;
+L_000002354ab2abb0 .functor OR 8, v000002354ab19740_0, v000002354ab19880_0, C4<00000000>, C4<00000000>;
+v000002354ab19740_0 .var "a", 7 0;
+v000002354ab197e0_0 .net "and_out", 7 0, L_000002354ab2ad70;  1 drivers
+v000002354ab19880_0 .var "b", 7 0;
+v000002354ab2b5c0_0 .net "expected_and_out", 7 0, L_000002354ab2ac20;  1 drivers
+v000002354ab23500_0 .net "expected_mux_out", 7 0, L_000002354ab233c0;  1 drivers
+v000002354ab231e0_0 .net "expected_or_out", 7 0, L_000002354ab2abb0;  1 drivers
+v000002354ab238c0_0 .var/i "mismatches", 31 0;
+v000002354ab23280_0 .net "mux_out", 7 0, L_000002354ab23960;  1 drivers
+v000002354ab22ec0_0 .net "or_out", 7 0, L_000002354ab2ade0;  1 drivers
+v000002354ab23460_0 .var "sel", 0 0;
+L_000002354ab233c0 .functor MUXZ 8, v000002354ab19880_0, v000002354ab19740_0, v000002354ab23460_0, C4<>;
+S_000002354ab195b0 .scope module, "uut" "logic_unit_b" 3 19, 4 1 0, S_000002354ab18a10;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 8 "a";
+    .port_info 1 /INPUT 8 "b";
+    .port_info 2 /INPUT 1 "sel";
+    .port_info 3 /OUTPUT 8 "and_out";
+    .port_info 4 /OUTPUT 8 "or_out";
+    .port_info 5 /OUTPUT 8 "mux_out";
+L_000002354ab2ad70 .functor AND 8, v000002354ab19740_0, v000002354ab19880_0, C4<11111111>, C4<11111111>;
+L_000002354ab2ade0 .functor OR 8, v000002354ab19740_0, v000002354ab19880_0, C4<00000000>, C4<00000000>;
+v000002354ab17050_0 .net "a", 7 0, v000002354ab19740_0;  1 drivers
+v000002354ab164b0_0 .net "and_out", 7 0, L_000002354ab2ad70;  alias, 1 drivers
+v000002354a89bd90_0 .net "b", 7 0, v000002354ab19880_0;  1 drivers
+v000002354a89be30_0 .net "mux_out", 7 0, L_000002354ab23960;  alias, 1 drivers
+v000002354ab18ba0_0 .net "or_out", 7 0, L_000002354ab2ade0;  alias, 1 drivers
+v000002354ab18c40_0 .net "sel", 0 0, v000002354ab23460_0;  1 drivers
+L_000002354ab23960 .functor MUXZ 8, v000002354ab19880_0, v000002354ab19740_0, v000002354ab23460_0, C4<>;
+    .scope S_000002354ab18a10;
+T_0 ;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v000002354ab238c0_0, 0, 32;
+    %pushi/vec4 12, 0, 8;
+    %store/vec4 v000002354ab19740_0, 0, 8;
+    %pushi/vec4 3, 0, 8;
+    %store/vec4 v000002354ab19880_0, 0, 8;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v000002354ab23460_0, 0, 1;
+    %delay 1000, 0;
+    %load/vec4 v000002354ab197e0_0;
+    %load/vec4 v000002354ab2b5c0_0;
+    %cmp/ne;
+    %jmp/1 T_0.3, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v000002354ab22ec0_0;
+    %load/vec4 v000002354ab231e0_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.3;
+    %jmp/1 T_0.2, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v000002354ab23280_0;
+    %load/vec4 v000002354ab23500_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.2;
+    %jmp/0xz  T_0.0, 6;
+    %load/vec4 v000002354ab238c0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v000002354ab238c0_0, 0, 32;
+    %vpi_call/w 3 36 "$display", "Case 1 mismatch", " and_out=%h expected=%h", " or_out=%h expected=%h", " mux_out=%h expected=%h", v000002354ab197e0_0, v000002354ab2b5c0_0, v000002354ab22ec0_0, v000002354ab231e0_0, v000002354ab23280_0, v000002354ab23500_0 {0 0 0};
+T_0.0 ;
+    %pushi/vec4 240, 0, 8;
+    %store/vec4 v000002354ab19740_0, 0, 8;
+    %pushi/vec4 15, 0, 8;
+    %store/vec4 v000002354ab19880_0, 0, 8;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v000002354ab23460_0, 0, 1;
+    %delay 1000, 0;
+    %load/vec4 v000002354ab197e0_0;
+    %load/vec4 v000002354ab2b5c0_0;
+    %cmp/ne;
+    %jmp/1 T_0.7, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v000002354ab22ec0_0;
+    %load/vec4 v000002354ab231e0_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.7;
+    %jmp/1 T_0.6, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v000002354ab23280_0;
+    %load/vec4 v000002354ab23500_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.6;
+    %jmp/0xz  T_0.4, 6;
+    %load/vec4 v000002354ab238c0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v000002354ab238c0_0, 0, 32;
+    %vpi_call/w 3 44 "$display", "Case 2 mismatch", " and_out=%h expected=%h", " or_out=%h expected=%h", " mux_out=%h expected=%h", v000002354ab197e0_0, v000002354ab2b5c0_0, v000002354ab22ec0_0, v000002354ab231e0_0, v000002354ab23280_0, v000002354ab23500_0 {0 0 0};
+T_0.4 ;
+    %pushi/vec4 51, 0, 8;
+    %store/vec4 v000002354ab19740_0, 0, 8;
+    %pushi/vec4 85, 0, 8;
+    %store/vec4 v000002354ab19880_0, 0, 8;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v000002354ab23460_0, 0, 1;
+    %delay 1000, 0;
+    %load/vec4 v000002354ab197e0_0;
+    %load/vec4 v000002354ab2b5c0_0;
+    %cmp/ne;
+    %jmp/1 T_0.11, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v000002354ab22ec0_0;
+    %load/vec4 v000002354ab231e0_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.11;
+    %jmp/1 T_0.10, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v000002354ab23280_0;
+    %load/vec4 v000002354ab23500_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.10;
+    %jmp/0xz  T_0.8, 6;
+    %load/vec4 v000002354ab238c0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v000002354ab238c0_0, 0, 32;
+    %vpi_call/w 3 52 "$display", "Case 3 mismatch", " and_out=%h expected=%h", " or_out=%h expected=%h", " mux_out=%h expected=%h", v000002354ab197e0_0, v000002354ab2b5c0_0, v000002354ab22ec0_0, v000002354ab231e0_0, v000002354ab23280_0, v000002354ab23500_0 {0 0 0};
+T_0.8 ;
+    %load/vec4 v000002354ab238c0_0;
+    %cmpi/e 0, 0, 32;
+    %jmp/0xz  T_0.12, 4;
+    %vpi_call/w 3 55 "$display", "[SUCCESS] All vectors matched" {0 0 0};
+    %jmp T_0.13;
+T_0.12 ;
+    %vpi_call/w 3 57 "$display", "[MISMATCH] Total mismatches: %0d", v000002354ab238c0_0 {0 0 0};
+T_0.13 ;
+    %vpi_call/w 3 58 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "-";
+    "C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case06_logic_or_and\tb\tb_logic_unit_b.v";
+    "C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case06_logic_or_and\patched_netlist\logic_unit_b_patched_2.v";

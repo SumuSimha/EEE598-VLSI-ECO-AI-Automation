@@ -1,0 +1,11 @@
+Top module: bitmix_unit_b
+Buggy source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case14_bitmix_mask_op\buggy_netlist\bitmix_unit_b_bug.v
+Golden source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case14_bitmix_mask_op\golden_rtl\bitmix_unit_b.v
+Output count: buggy=4 golden=4
+Assignment count: buggy=3 golden=3
+Suspicious outputs: masked_lo
+Cone differences: masked_lo
+Likely reconstructed intent:
+- masked_lo (score=9)
+  buggy : masked_lo = (data | mask)
+  golden: masked_lo = (data & mask)

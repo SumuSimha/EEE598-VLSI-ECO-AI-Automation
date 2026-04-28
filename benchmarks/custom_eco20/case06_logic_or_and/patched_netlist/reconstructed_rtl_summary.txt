@@ -1,0 +1,11 @@
+Top module: logic_unit_b
+Buggy source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case06_logic_or_and\buggy_netlist\logic_unit_b_bug.v
+Golden source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case06_logic_or_and\golden_rtl\logic_unit_b.v
+Output count: buggy=3 golden=3
+Assignment count: buggy=3 golden=3
+Suspicious outputs: or_out
+Cone differences: or_out
+Likely reconstructed intent:
+- or_out (score=9)
+  buggy : or_out = (a & b)
+  golden: or_out = (a | b)

@@ -1,0 +1,14 @@
+Top module: shift_unit_b
+Buggy source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case18_shift_rotate\buggy_netlist\shift_unit_b_bug.v
+Golden source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case18_shift_rotate\golden_rtl\shift_unit_b.v
+Output count: buggy=2 golden=2
+Assignment count: buggy=2 golden=2
+Suspicious outputs: rotl1, rotr1
+Cone differences: rotl1, rotr1
+Likely reconstructed intent:
+- rotl1 (score=13)
+  buggy : rotl1 = <pyverilog.vparser.ast.Concat object at 0x000001B2B11F9D50>
+  golden: rotl1 = <pyverilog.vparser.ast.Concat object at 0x000001B2B11F8BB0>
+- rotr1 (score=13)
+  buggy : rotr1 = <pyverilog.vparser.ast.Concat object at 0x000001B2B16BEF50>
+  golden: rotr1 = <pyverilog.vparser.ast.Concat object at 0x000001B2B1392020>

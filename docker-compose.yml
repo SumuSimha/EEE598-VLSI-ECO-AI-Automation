@@ -1,0 +1,29 @@
+services:
+  eco-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+      - codex_home:/root/.codex
+    stdin_open: true
+    tty: true
+    command: python run_simulation.py --check-only
+
+  eco-benchmark:
+    profiles:
+      - benchmark
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+      - codex_home:/root/.codex
+    stdin_open: true
+    tty: true
+    command: python tools/run_custom_benchmark.py --all
+
+volumes:
+  codex_home:

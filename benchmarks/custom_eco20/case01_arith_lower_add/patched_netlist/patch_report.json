@@ -1,0 +1,68 @@
+{
+  "title": "ECO Patch Report",
+  "status": "PATCH_APPLIED",
+  "supported_mode": "assign-level-combinational",
+  "confidence": 90,
+  "reason": "Patch generated and verified against the golden baseline",
+  "details": [
+    "Patch generation will use Codex plus simulation-guided verification on suspicious outputs.",
+    "Reconstructed RTL summary: C:\\Users\\sumuk\\OneDrive\\Desktop\\Auto_VLSI\\benchmarks\\custom_eco20\\case01_arith_lower_add\\patched_netlist\\reconstructed_rtl_summary.txt",
+    "Reconstructed RTL candidate: C:\\Users\\sumuk\\OneDrive\\Desktop\\Auto_VLSI\\benchmarks\\custom_eco20\\case01_arith_lower_add\\patched_netlist\\reconstructed_rtl_candidate.v"
+  ],
+  "bug_summary": {
+    "bug_type": "bit-slice or bus-range mismatch",
+    "affected_outputs": [
+      "sum",
+      "xor_out"
+    ],
+    "changed_signals": [
+      "sum",
+      "sum[3:0]",
+      "sum[7:4]"
+    ],
+    "ranked_bug_candidates": [
+      {
+        "signal": "sum",
+        "score": 5
+      },
+      {
+        "signal": "xor_out",
+        "score": 5
+      }
+    ],
+    "explanation": "The buggy netlist differed from the golden design on 2 suspicious outputs and was patched within the supported assign-level-combinational flow."
+  },
+  "changed_lines": [
+    {
+      "tag": "replace",
+      "before_start": 7,
+      "before_end": 8,
+      "after_start": 7,
+      "after_end": 8,
+      "before_lines": [
+        "    assign sum[3:0] = a[3:0] & b[3:0];",
+        "    assign sum[7:4] = a[7:4] + b[7:4];"
+      ],
+      "after_lines": [
+        "    ",
+        "    assign sum = a + b;"
+      ]
+    }
+  ],
+  "verification": {
+    "passed": true,
+    "summary": "[SUCCESS] All vectors matched\nC:\\Users\\sumuk\\OneDrive\\Desktop\\Auto_VLSI\\benchmarks\\custom_eco20\\case01_arith_lower_add\\tb\\tb_arith_unit_a.v:49: $finish called at 3000 (1ps)"
+  },
+  "minimality": {
+    "edit_hunks": 1,
+    "changed_line_count": 4,
+    "changed_signal_count": 3
+  },
+  "execution_summary": {
+    "executor": "heuristic",
+    "selected_strategy": "replace_mismatched_outputs",
+    "strategy_attempts": 1,
+    "successful_candidates": 1,
+    "syntax_attempts_for_selected_candidate": 1
+  }
+}

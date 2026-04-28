@@ -1,0 +1,14 @@
+Top module: compare_unit_d
+Buggy source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case12_compare_swap_outputs\buggy_netlist\compare_unit_d_bug.v
+Golden source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case12_compare_swap_outputs\golden_rtl\compare_unit_d.v
+Output count: buggy=5 golden=5
+Assignment count: buggy=3 golden=3
+Suspicious outputs: gt, lt
+Cone differences: gt, lt
+Likely reconstructed intent:
+- gt (score=9)
+  buggy : gt = (a < b)
+  golden: gt = (a > b)
+- lt (score=9)
+  buggy : lt = (a > b)
+  golden: lt = (a < b)

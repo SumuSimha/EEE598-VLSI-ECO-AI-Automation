@@ -1,0 +1,65 @@
+{
+  "title": "ECO Patch Report",
+  "status": "PATCH_APPLIED",
+  "supported_mode": "assign-level-combinational",
+  "confidence": 90,
+  "reason": "Patch generated and verified against the golden baseline",
+  "details": [
+    "Patch generation will use Codex plus simulation-guided verification on suspicious outputs.",
+    "Reconstructed RTL summary: C:\\Users\\sumuk\\OneDrive\\Desktop\\Auto_VLSI\\benchmarks\\custom_eco20\\case20_checksum_slice\\patched_netlist\\reconstructed_rtl_summary.txt",
+    "Reconstructed RTL candidate: C:\\Users\\sumuk\\OneDrive\\Desktop\\Auto_VLSI\\benchmarks\\custom_eco20\\case20_checksum_slice\\patched_netlist\\reconstructed_rtl_candidate.v"
+  ],
+  "bug_summary": {
+    "bug_type": "bit-slice or bus-range mismatch",
+    "affected_outputs": [
+      "checksum",
+      "folded"
+    ],
+    "changed_signals": [
+      "checksum"
+    ],
+    "ranked_bug_candidates": [
+      {
+        "signal": "checksum",
+        "score": 4
+      },
+      {
+        "signal": "folded",
+        "score": 4
+      }
+    ],
+    "explanation": "The buggy netlist differed from the golden design on 2 suspicious outputs and was patched within the supported assign-level-combinational flow."
+  },
+  "changed_lines": [
+    {
+      "tag": "replace",
+      "before_start": 6,
+      "before_end": 6,
+      "after_start": 6,
+      "after_end": 7,
+      "before_lines": [
+        "    assign checksum = data[15:8] + data[15:8];"
+      ],
+      "after_lines": [
+        "    ",
+        "    assign checksum = data[15:8] + data[7:0];"
+      ]
+    }
+  ],
+  "verification": {
+    "passed": true,
+    "summary": "[SUCCESS] All vectors matched\nC:\\Users\\sumuk\\OneDrive\\Desktop\\Auto_VLSI\\benchmarks\\custom_eco20\\case20_checksum_slice\\tb\\tb_checksum_unit_a.v:44: $finish called at 3000 (1ps)"
+  },
+  "minimality": {
+    "edit_hunks": 1,
+    "changed_line_count": 3,
+    "changed_signal_count": 1
+  },
+  "execution_summary": {
+    "executor": "heuristic",
+    "selected_strategy": "replace_mismatched_outputs",
+    "strategy_attempts": 1,
+    "successful_candidates": 1,
+    "syntax_attempts_for_selected_candidate": 1
+  }
+}

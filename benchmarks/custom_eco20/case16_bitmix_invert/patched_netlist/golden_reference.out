@@ -1,0 +1,132 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2009.vpi";
+S_000001f2f2cd66e0 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_000001f2f2cd9dc0 .scope module, "tb_bitmix_unit_d" "tb_bitmix_unit_d" 3 3;
+ .timescale -9 -12;
+L_000001f2f2ceb1a0 .functor NOT 8, L_000001f2f2d3caa0, C4<00000000>, C4<00000000>, C4<00000000>;
+L_000001f2f2ceb280 .functor OR 8, L_000001f2f2d3c5a0, L_000001f2f2d3c3c0, C4<00000000>, C4<00000000>;
+v000001f2f2d3cd20_0 .net *"_ivl_1", 7 0, L_000001f2f2d3caa0;  1 drivers
+v000001f2f2d3c320_0 .net *"_ivl_5", 7 0, L_000001f2f2d3c5a0;  1 drivers
+v000001f2f2d3c640_0 .net *"_ivl_7", 7 0, L_000001f2f2d3c3c0;  1 drivers
+v000001f2f2d3c0a0_0 .var "data", 15 0;
+v000001f2f2d3c780_0 .net "expected_lower_or", 7 0, L_000001f2f2ceb280;  1 drivers
+v000001f2f2d3cdc0_0 .net "expected_upper_inv", 7 0, L_000001f2f2ceb1a0;  1 drivers
+v000001f2f2d3c820_0 .net "lower_or", 7 0, L_000001f2f2ceb2f0;  1 drivers
+v000001f2f2d3c1e0_0 .var "mask", 15 0;
+v000001f2f2d3c280_0 .var/i "mismatches", 31 0;
+v000001f2f2d3c8c0_0 .net "upper_inv", 7 0, L_000001f2f2ceb7c0;  1 drivers
+L_000001f2f2d3caa0 .part v000001f2f2d3c0a0_0, 8, 8;
+L_000001f2f2d3c5a0 .part v000001f2f2d3c0a0_0, 0, 8;
+L_000001f2f2d3c3c0 .part v000001f2f2d3c1e0_0, 0, 8;
+S_000001f2f2cd9f50 .scope module, "uut" "bitmix_unit_d" 3 15, 4 1 0, S_000001f2f2cd9dc0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 16 "data";
+    .port_info 1 /INPUT 16 "mask";
+    .port_info 2 /OUTPUT 8 "upper_inv";
+    .port_info 3 /OUTPUT 8 "lower_or";
+L_000001f2f2ceb7c0 .functor NOT 8, L_000001f2f2d3ce60, C4<00000000>, C4<00000000>, C4<00000000>;
+L_000001f2f2ceb2f0 .functor OR 8, L_000001f2f2d3c6e0, L_000001f2f2d3cb40, C4<00000000>, C4<00000000>;
+v000001f2f2e9be20_0 .net *"_ivl_1", 7 0, L_000001f2f2d3ce60;  1 drivers
+v000001f2f2e9a6c0_0 .net *"_ivl_5", 7 0, L_000001f2f2d3c6e0;  1 drivers
+v000001f2f2cd7620_0 .net *"_ivl_7", 7 0, L_000001f2f2d3cb40;  1 drivers
+v000001f2f2cd76c0_0 .net "data", 15 0, v000001f2f2d3c0a0_0;  1 drivers
+v000001f2f2cd6cb0_0 .net "lower_or", 7 0, L_000001f2f2ceb2f0;  alias, 1 drivers
+v000001f2f2cd6d50_0 .net "mask", 15 0, v000001f2f2d3c1e0_0;  1 drivers
+v000001f2f2cda730_0 .net "upper_inv", 7 0, L_000001f2f2ceb7c0;  alias, 1 drivers
+L_000001f2f2d3ce60 .part v000001f2f2d3c0a0_0, 8, 8;
+L_000001f2f2d3c6e0 .part v000001f2f2d3c0a0_0, 0, 8;
+L_000001f2f2d3cb40 .part v000001f2f2d3c1e0_0, 0, 8;
+    .scope S_000001f2f2cd9dc0;
+T_0 ;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v000001f2f2d3c280_0, 0, 32;
+    %pushi/vec4 43981, 0, 16;
+    %store/vec4 v000001f2f2d3c0a0_0, 0, 16;
+    %pushi/vec4 0, 0, 16;
+    %store/vec4 v000001f2f2d3c1e0_0, 0, 16;
+    %delay 1000, 0;
+    %load/vec4 v000001f2f2d3c8c0_0;
+    %load/vec4 v000001f2f2d3cdc0_0;
+    %cmp/ne;
+    %jmp/1 T_0.2, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v000001f2f2d3c820_0;
+    %load/vec4 v000001f2f2d3c780_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.2;
+    %jmp/0xz  T_0.0, 6;
+    %load/vec4 v000001f2f2d3c280_0;
+    %addi 1, 0, 32;
+    %store/vec4 v000001f2f2d3c280_0, 0, 32;
+    %vpi_call/w 3 29 "$display", "Case 1 mismatch", " upper_inv=%h expected=%h", " lower_or=%h expected=%h", v000001f2f2d3c8c0_0, v000001f2f2d3cdc0_0, v000001f2f2d3c820_0, v000001f2f2d3c780_0 {0 0 0};
+T_0.0 ;
+    %pushi/vec4 4660, 0, 16;
+    %store/vec4 v000001f2f2d3c0a0_0, 0, 16;
+    %pushi/vec4 240, 0, 16;
+    %store/vec4 v000001f2f2d3c1e0_0, 0, 16;
+    %delay 1000, 0;
+    %load/vec4 v000001f2f2d3c8c0_0;
+    %load/vec4 v000001f2f2d3cdc0_0;
+    %cmp/ne;
+    %jmp/1 T_0.5, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v000001f2f2d3c820_0;
+    %load/vec4 v000001f2f2d3c780_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.5;
+    %jmp/0xz  T_0.3, 6;
+    %load/vec4 v000001f2f2d3c280_0;
+    %addi 1, 0, 32;
+    %store/vec4 v000001f2f2d3c280_0, 0, 32;
+    %vpi_call/w 3 36 "$display", "Case 2 mismatch", " upper_inv=%h expected=%h", " lower_or=%h expected=%h", v000001f2f2d3c8c0_0, v000001f2f2d3cdc0_0, v000001f2f2d3c820_0, v000001f2f2d3c780_0 {0 0 0};
+T_0.3 ;
+    %pushi/vec4 255, 0, 16;
+    %store/vec4 v000001f2f2d3c0a0_0, 0, 16;
+    %pushi/vec4 3855, 0, 16;
+    %store/vec4 v000001f2f2d3c1e0_0, 0, 16;
+    %delay 1000, 0;
+    %load/vec4 v000001f2f2d3c8c0_0;
+    %load/vec4 v000001f2f2d3cdc0_0;
+    %cmp/ne;
+    %jmp/1 T_0.8, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v000001f2f2d3c820_0;
+    %load/vec4 v000001f2f2d3c780_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.8;
+    %jmp/0xz  T_0.6, 6;
+    %load/vec4 v000001f2f2d3c280_0;
+    %addi 1, 0, 32;
+    %store/vec4 v000001f2f2d3c280_0, 0, 32;
+    %vpi_call/w 3 43 "$display", "Case 3 mismatch", " upper_inv=%h expected=%h", " lower_or=%h expected=%h", v000001f2f2d3c8c0_0, v000001f2f2d3cdc0_0, v000001f2f2d3c820_0, v000001f2f2d3c780_0 {0 0 0};
+T_0.6 ;
+    %load/vec4 v000001f2f2d3c280_0;
+    %cmpi/e 0, 0, 32;
+    %jmp/0xz  T_0.9, 4;
+    %vpi_call/w 3 46 "$display", "[SUCCESS] All vectors matched" {0 0 0};
+    %jmp T_0.10;
+T_0.9 ;
+    %vpi_call/w 3 48 "$display", "[MISMATCH] Total mismatches: %0d", v000001f2f2d3c280_0 {0 0 0};
+T_0.10 ;
+    %vpi_call/w 3 49 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "-";
+    "C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case16_bitmix_invert\tb\tb_bitmix_unit_d.v";
+    "C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case16_bitmix_invert\golden_rtl\bitmix_unit_d.v";

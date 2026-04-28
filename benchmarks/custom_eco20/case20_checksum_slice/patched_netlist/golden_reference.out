@@ -1,0 +1,127 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2009.vpi";
+S_000001f3974a7fe0 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_000001f3974aa5b0 .scope module, "tb_checksum_unit_a" "tb_checksum_unit_a" 3 3;
+ .timescale -9 -12;
+L_000001f3974a4f00 .functor XOR 8, L_000001f3975059e0, L_000001f3975062a0, C4<00000000>, C4<00000000>;
+v000001f397505a80_0 .net *"_ivl_1", 7 0, L_000001f3975060c0;  1 drivers
+v000001f397506340_0 .net *"_ivl_3", 7 0, L_000001f397506160;  1 drivers
+v000001f397506480_0 .net *"_ivl_7", 7 0, L_000001f3975059e0;  1 drivers
+v000001f3975063e0_0 .net *"_ivl_9", 7 0, L_000001f3975062a0;  1 drivers
+v000001f397506660_0 .net "checksum", 7 0, L_000001f397505940;  1 drivers
+v000001f397505b20_0 .var "data", 15 0;
+v000001f397506020_0 .net "expected_checksum", 7 0, L_000001f397506200;  1 drivers
+v000001f397505f80_0 .net "expected_folded", 7 0, L_000001f3974a4f00;  1 drivers
+v000001f3975067a0_0 .net "folded", 7 0, L_000001f3974a4db0;  1 drivers
+v000001f3975058a0_0 .var/i "mismatches", 31 0;
+L_000001f3975060c0 .part v000001f397505b20_0, 8, 8;
+L_000001f397506160 .part v000001f397505b20_0, 0, 8;
+L_000001f397506200 .arith/sum 8, L_000001f3975060c0, L_000001f397506160;
+L_000001f3975059e0 .part v000001f397505b20_0, 8, 8;
+L_000001f3975062a0 .part v000001f397505b20_0, 0, 8;
+S_000001f3974aaea0 .scope module, "uut" "checksum_unit_a" 3 14, 4 1 0, S_000001f3974aa5b0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 16 "data";
+    .port_info 1 /OUTPUT 8 "checksum";
+    .port_info 2 /OUTPUT 8 "folded";
+L_000001f3974a4db0 .functor XOR 8, L_000001f397505c60, L_000001f397505e40, C4<00000000>, C4<00000000>;
+v000001f3974a5490_0 .net *"_ivl_1", 7 0, L_000001f397505bc0;  1 drivers
+v000001f3974a8ea0_0 .net *"_ivl_3", 7 0, L_000001f397506520;  1 drivers
+v000001f3974a85b0_0 .net *"_ivl_7", 7 0, L_000001f397505c60;  1 drivers
+v000001f3974aa740_0 .net *"_ivl_9", 7 0, L_000001f397505e40;  1 drivers
+v000001f3974aa7e0_0 .net "checksum", 7 0, L_000001f397505940;  alias, 1 drivers
+v000001f3974ab030_0 .net "data", 15 0, v000001f397505b20_0;  1 drivers
+v000001f3974ab0d0_0 .net "folded", 7 0, L_000001f3974a4db0;  alias, 1 drivers
+L_000001f397505bc0 .part v000001f397505b20_0, 8, 8;
+L_000001f397506520 .part v000001f397505b20_0, 0, 8;
+L_000001f397505940 .arith/sum 8, L_000001f397505bc0, L_000001f397506520;
+L_000001f397505c60 .part v000001f397505b20_0, 8, 8;
+L_000001f397505e40 .part v000001f397505b20_0, 0, 8;
+    .scope S_000001f3974aa5b0;
+T_0 ;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v000001f3975058a0_0, 0, 32;
+    %pushi/vec4 4660, 0, 16;
+    %store/vec4 v000001f397505b20_0, 0, 16;
+    %delay 1000, 0;
+    %load/vec4 v000001f397506660_0;
+    %load/vec4 v000001f397506020_0;
+    %cmp/ne;
+    %jmp/1 T_0.2, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v000001f3975067a0_0;
+    %load/vec4 v000001f397505f80_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.2;
+    %jmp/0xz  T_0.0, 6;
+    %load/vec4 v000001f3975058a0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v000001f3975058a0_0, 0, 32;
+    %vpi_call/w 3 26 "$display", "Case 1 mismatch", " checksum=%h expected=%h", " folded=%h expected=%h", v000001f397506660_0, v000001f397506020_0, v000001f3975067a0_0, v000001f397505f80_0 {0 0 0};
+T_0.0 ;
+    %pushi/vec4 43981, 0, 16;
+    %store/vec4 v000001f397505b20_0, 0, 16;
+    %delay 1000, 0;
+    %load/vec4 v000001f397506660_0;
+    %load/vec4 v000001f397506020_0;
+    %cmp/ne;
+    %jmp/1 T_0.5, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v000001f3975067a0_0;
+    %load/vec4 v000001f397505f80_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.5;
+    %jmp/0xz  T_0.3, 6;
+    %load/vec4 v000001f3975058a0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v000001f3975058a0_0, 0, 32;
+    %vpi_call/w 3 32 "$display", "Case 2 mismatch", " checksum=%h expected=%h", " folded=%h expected=%h", v000001f397506660_0, v000001f397506020_0, v000001f3975067a0_0, v000001f397505f80_0 {0 0 0};
+T_0.3 ;
+    %pushi/vec4 255, 0, 16;
+    %store/vec4 v000001f397505b20_0, 0, 16;
+    %delay 1000, 0;
+    %load/vec4 v000001f397506660_0;
+    %load/vec4 v000001f397506020_0;
+    %cmp/ne;
+    %jmp/1 T_0.8, 6;
+    %flag_mov 8, 6;
+    %load/vec4 v000001f3975067a0_0;
+    %load/vec4 v000001f397505f80_0;
+    %cmp/ne;
+    %flag_or 6, 8;
+T_0.8;
+    %jmp/0xz  T_0.6, 6;
+    %load/vec4 v000001f3975058a0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v000001f3975058a0_0, 0, 32;
+    %vpi_call/w 3 38 "$display", "Case 3 mismatch", " checksum=%h expected=%h", " folded=%h expected=%h", v000001f397506660_0, v000001f397506020_0, v000001f3975067a0_0, v000001f397505f80_0 {0 0 0};
+T_0.6 ;
+    %load/vec4 v000001f3975058a0_0;
+    %cmpi/e 0, 0, 32;
+    %jmp/0xz  T_0.9, 4;
+    %vpi_call/w 3 41 "$display", "[SUCCESS] All vectors matched" {0 0 0};
+    %jmp T_0.10;
+T_0.9 ;
+    %vpi_call/w 3 43 "$display", "[MISMATCH] Total mismatches: %0d", v000001f3975058a0_0 {0 0 0};
+T_0.10 ;
+    %vpi_call/w 3 44 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "-";
+    "C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case20_checksum_slice\tb\tb_checksum_unit_a.v";
+    "C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case20_checksum_slice\golden_rtl\checksum_unit_a.v";

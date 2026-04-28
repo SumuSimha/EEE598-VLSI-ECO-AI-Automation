@@ -1,0 +1,11 @@
+Top module: compare_unit_a
+Buggy source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case09_compare_eq\buggy_netlist\compare_unit_a_bug.v
+Golden source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case09_compare_eq\golden_rtl\compare_unit_a.v
+Output count: buggy=5 golden=5
+Assignment count: buggy=3 golden=3
+Suspicious outputs: eq
+Cone differences: eq
+Likely reconstructed intent:
+- eq (score=9)
+  buggy : eq = (a != b)
+  golden: eq = (a == b)

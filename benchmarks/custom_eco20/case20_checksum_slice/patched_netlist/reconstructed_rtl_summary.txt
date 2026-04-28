@@ -1,0 +1,14 @@
+Top module: checksum_unit_a
+Buggy source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case20_checksum_slice\buggy_netlist\checksum_unit_a_bug.v
+Golden source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case20_checksum_slice\golden_rtl\checksum_unit_a.v
+Output count: buggy=2 golden=2
+Assignment count: buggy=2 golden=2
+Suspicious outputs: checksum, folded
+Cone differences: (none)
+Likely reconstructed intent:
+- checksum (score=4)
+  buggy : checksum = (data + data)
+  golden: checksum = (data + data)
+- folded (score=4)
+  buggy : folded = (data ^ data)
+  golden: folded = (data ^ data)

@@ -1,0 +1,38 @@
+[INFO] Project root: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case20_checksum_slice
+[INFO] Project label: default
+[INFO] Golden RTL: checksum_unit_a.v
+[INFO] Buggy netlist: checksum_unit_a_bug.v
+[INFO] Testbench: tb_checksum_unit_a.v
+[INFO] Library files: 0
+[INFO] Library search dirs (-y): 0
+[INFO] Golden design file count: 1
+[INFO] Buggy design style: assign_level
+[INFO] Feasibility status: PATCH_POSSIBLE
+[INFO] Feasibility reason: The design matches the supported combinational repair flow
+[INFO] Feasibility confidence: 90
+[INFO] Feasibility reports: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case20_checksum_slice\patched_netlist\feasibility_report.json, C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case20_checksum_slice\patched_netlist\feasibility_report.md
+[INFO] Top module: checksum_unit_a
+[INFO] Suspicious outputs:
+  - checksum
+  - folded
+[INFO] Structural mismatch summary:
+  - Falling back to whole-output analysis for checksum
+  - Falling back to whole-output analysis for folded
+[INFO] Backward cone of influence (3 signals): checksum, data, folded
+[INFO] No direct assign-level mismatches found inside the cone; using output-level replacement.
+[STATUS] Running golden reference simulation...
+[INFO] Golden simulation baseline:
+[SUCCESS] All vectors matched
+C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case20_checksum_slice\tb\tb_checksum_unit_a.v:44: $finish called at 3000 (1ps)
+[INFO] Reconstructed RTL summary: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case20_checksum_slice\patched_netlist\reconstructed_rtl_summary.txt
+[INFO] Reconstructed RTL candidate: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case20_checksum_slice\patched_netlist\reconstructed_rtl_candidate.v
+[INFO] Agent architecture: planner=python executor=heuristic-assign-rewrite verifier=iverilog/vvp
+[STATUS] Trying strategy 1: replace_mismatched_outputs
+[INFO] Candidate target count: 2
+[INFO] Passing candidate minimality: hunks=1 lines=3 signals=1
+[SUCCESS] Repaired netlist written to C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case20_checksum_slice\patched_netlist\checksum_unit_a_patched.v
+[INFO] Selected minimal passing patch: hunks=1 lines=3 signals=1
+[INFO] Patch reports: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case20_checksum_slice\patched_netlist\patch_report.json, C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case20_checksum_slice\patched_netlist\patch_report.md
+[INFO] Matching simulation transcript:
+[SUCCESS] All vectors matched
+C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\benchmarks\custom_eco20\case20_checksum_slice\tb\tb_checksum_unit_a.v:44: $finish called at 3000 (1ps)

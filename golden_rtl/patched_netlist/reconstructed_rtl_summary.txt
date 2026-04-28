@@ -1,0 +1,14 @@
+Top module: arith_unit
+Buggy source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\buggy_netlist\arith_unit_bug.v
+Golden source: C:\Users\sumuk\OneDrive\Desktop\Auto_VLSI\golden_rtl\arith_unit.v
+Output count: buggy=2 golden=2
+Assignment count: buggy=4 golden=2
+Suspicious outputs: sum, xor_out
+Cone differences: (none)
+Likely reconstructed intent:
+- sum (score=5)
+  buggy : sum = (a & b) | sum = (a + b)
+  golden: sum = (a + b)
+- xor_out (score=5)
+  buggy : xor_out = (a ^ b) | xor_out = (a ^ b)
+  golden: xor_out = (a ^ b)
