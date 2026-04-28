@@ -1,76 +1,188 @@
-# EEE598-VLSI-ECO-AI-Automation
-Autonomous AI-driven system for VLSI bug localization and ECO patch generation. Features closed-loop simulation feedback using Icarus Verilog and LLM-based reasoning for netlist repair.
+# Automated ECO Agent
 
-PROJECT OVERVIEW
-This project implements an Automated Engineering Change Order (ECO) flow using
-an AI-driven "Orchestrator" layer. The tool identifies functional discrepancies
-between a Golden RTL reference and a Buggy Netlist, autonomously generates a
-Verilog patch, and verifies the fix using Icarus Verilog.
+This project implements a generic AI-assisted ECO flow for supported Verilog repair cases. The tool performs feasibility analysis, bug localization, Codex-driven patch generation, simulation-based verification, and structured reporting.
 
-The core innovation lies in the Hybrid Orchestration Strategy, which bypasses
-AI sandbox limitations by using a Python-based execution layer to implement the
-AI's logical reasoning on the physical file system.
+## Scope
 
-2. PROJECT STRUCTURE
-Auto_VLSI/
-|-- golden_rtl/          Reference Verilog files (Correct Logic)
-|-- buggy_netlist/       Gate-level netlists containing logical errors
-|-- patched_netlist/     Output directory for AI-generated repairs
-|-- tb/                  Testbenches for functional verification
-|-- lib/                 Standard Cell Library definitions (.v)
-|-- ECO_Agent.py         The main Python Orchestrator script
-|-- final_repair_log.txt  Automatically generated execution logs
-`-- README.txt           You are here!
+Best-supported classes:
+- Assign-level combinational designs
+- Some combinational procedural designs
+- Benchmark-style standard-cell reconstruction cases when `buggy_rtl/` is available
+- Wrapper-only fallback for some gate-level designs
+- Limited single-clock sequential classification and Phase 3 plumbing
 
-3. FEATURES
-- Semantic Logic Diffing: The AI analyzes the functional intent of the code
-  rather than just text differences.
-- Autonomous Patching: Automatically corrects common VLSI errors such as
-  bit-slice swaps and incorrect gate mappings.
-- Closed-Loop Verification: Integrates with iverilog and vvp to ensure the
-  patched netlist matches the golden reference before finalizing.
-- Hybrid Execution: Combines high-level AI reasoning with a robust Python
-  backend to handle file I/O and toolchain execution safely.
+Current outputs:
+- `feasibility_report.json`
+- `feasibility_report.md`
+- `reconstructed_rtl_summary.txt`
+- `reconstructed_rtl_candidate.v`
+- `patch_report.json`
+- `patch_report.md`
+- patched Verilog outputs in `patched_netlist/`
 
-4. GETTING STARTED
+## Recommended Project Layout
 
-Prerequisites:
-- Python 3.8+
-- Icarus Verilog: Ensure 'iverilog' and 'vvp' are added to your System PATH.
-- Codex CLI: Installed and authenticated via your research/API provider.
+```text
+project_root/
+|-- golden_rtl/
+|   |-- top.v
+|   `-- support_files...
+|-- buggy_netlist/
+|   |-- top_netlist.v
+|   `-- support_files...
+|-- tb/
+|   `-- tb_top.v
+|-- lib/
+|   `-- standard_cells.v
+|-- buggy_rtl/                  # optional, used for reconstruction mode
+|   `-- candidate_buggy_rtl...
+`-- patched_netlist/            # auto-generated output directory
+```
 
-Installation & Setup:
-1. Clone this repository to your local machine (e.g., C:\Auto_VLSI).
-2. Ensure your directory structure matches the "Project Structure" section.
-3. Place your buggy files in buggy_netlist/ and the reference in golden_rtl/.
+Optional batch-friendly organization:
 
-Running the ECO Flow:
-Simply run the orchestrator script from the project root:
-Command: python ECO_Agent.py
+```text
+project_root/
+`-- cases/
+    |-- case_01/
+    |   |-- golden_rtl/
+    |   |-- buggy_netlist/
+    |   |-- tb/
+    |   `-- lib/
+    `-- case_02/
+        |-- golden_rtl/
+        |-- buggy_netlist/
+        |-- tb/
+        `-- lib/
+```
 
-5. HOW IT WORKS
-- Analysis Phase: The Orchestrator sends the Golden and Buggy files to the AI.
-- Diagnostic Phase: The Agent identifies specific logic failures (e.g., "Sum
-  logic using XOR instead of ADD").
-- Repair Phase: The Agent provides a corrected Verilog module wrapped in unique
-  markers (---FIXED_CODE_START---).
-- Implementation: Python extracts the code, cleans any Markdown formatting, and
-  saves it to the patched_netlist/ folder.
-- Verification: The script triggers iverilog. If the testbench prints
-  [SUCCESS], the repair is confirmed.
+Recommended generated output layout:
 
-6. EXAMPLE LOG OUTPUT
-[STATUS] Invoking AI Agent for Logic Analysis...
-[SUCCESS] Python extracted and saved the patch.
-[STATUS] Running Icarus Verilog Simulation...
-=== SIMULATION RESULTS ===
-Starting Simulation...
-[SUCCESS] Matches Golden RTL
-==========================
+```text
+patched_netlist/
+|-- feasibility_report.json
+|-- feasibility_report.md
+|-- reconstructed_rtl_summary.txt
+|-- reconstructed_rtl_candidate.v
+|-- patch_report.json
+|-- patch_report.md
+|-- <top>_patched.v
+`-- logs/                      # optional future extension for batch runs
+```
 
-7. CHALLENGES & FUTURE SCOPE
-- Sandbox Security: Current AI CLIs often enforce read-only environments. This
-  project solves this via Python bridging.
-- Next Step (Phase 3): Implementing a Dockerized environment to encapsulate the
-  EDA toolchain (iverilog, Yosys) for full portability across different
-  operating systems.
+## Input Modes
+
+### 1. Auto-discovery from a clean project root
+
+```powershell
+python ECO_Agent.py --project-root C:\path\to\project_root
+```
+
+This mode expects the recommended folder layout above.
+
+### 2. Explicit file paths
+
+```powershell
+python ECO_Agent.py `
+  --golden-file C:\path\to\golden.v `
+  --buggy-file C:\path\to\buggy.v `
+  --tb-file C:\path\to\tb.v `
+  --lib-dir C:\path\to\lib
+```
+
+Use this when the user does not want to follow the recommended folder layout.
+
+### 3. Analysis-only mode
+
+```powershell
+python ECO_Agent.py --check-only --project-root C:\path\to\project_root
+```
+
+This runs feasibility analysis and reconstruction artifact generation without invoking Codex for patch generation.
+
+### 4. Auto-testbench generation
+
+```powershell
+python ECO_Agent.py `
+  --golden-file C:\path\to\golden.v `
+  --buggy-file C:\path\to\buggy.v `
+  --auto-testbench `
+  --lib-dir C:\path\to\lib
+```
+
+This uses Codex CLI to generate a self-checking testbench from the golden RTL.
+
+## Requirements
+
+- Python 3.10+
+- Icarus Verilog with `iverilog` and `vvp` in `PATH`
+- Codex CLI installed and authenticated for patch generation or auto-testbench generation
+- Python dependencies from [requirements.txt](/C:/Users/sumuk/OneDrive/Desktop/Auto_VLSI/requirements.txt)
+
+Install dependencies:
+
+```powershell
+python -m pip install -r requirements.txt
+```
+
+## Docker
+
+Portable execution assets are included:
+- [Dockerfile](/C:/Users/sumuk/OneDrive/Desktop/Auto_VLSI/Dockerfile)
+- [docker-compose.yml](/C:/Users/sumuk/OneDrive/Desktop/Auto_VLSI/docker-compose.yml)
+
+Default quick feasibility run on the root example:
+
+```powershell
+docker compose up --build
+```
+
+Build the image once before running custom benchmark commands directly:
+
+```powershell
+docker compose build
+```
+
+Run all 20 custom ECO benchmark cases:
+
+```powershell
+docker compose run --rm eco-benchmark
+```
+
+List available benchmark cases:
+
+```powershell
+docker compose run --rm eco-agent python tools/run_custom_benchmark.py --list
+```
+
+Run whichever benchmark cases you want by number or case name:
+
+```powershell
+docker compose run --rm eco-agent python tools/run_custom_benchmark.py 1
+docker compose run --rm eco-agent python tools/run_custom_benchmark.py 1 5 20
+docker compose run --rm eco-agent python tools/run_custom_benchmark.py case05_logic_mux_sel case20_checksum_slice
+```
+
+Benchmark results are written to:
+
+```text
+benchmarks/custom_eco20/summary/benchmark_results.json
+benchmarks/custom_eco20/summary/benchmark_results.csv
+benchmarks/custom_eco20/summary/benchmark_results.md
+```
+
+Each selected case also gets its own generated `patched_netlist/` directory. The benchmark runner cleans selected case outputs before rerunning by default; pass `--keep-outputs` if you want to preserve prior generated files. For Codex-backed patch generation, the container still needs Codex authentication configured by the user. The 20-case benchmark uses the deterministic heuristic executor, so it does not require Codex login.
+
+## Built-in Layout Help
+
+Users can ask the tool to print the required generic project structure:
+
+```powershell
+python ECO_Agent.py --print-layout
+```
+
+## Notes
+
+- The tool is generic in interface, but not universal in repair power.
+- It is strongest on supported combinational and benchmark-style cases.
+- Reports are designed to tell the user when a repair is possible, wrapper-only, or out of scope.

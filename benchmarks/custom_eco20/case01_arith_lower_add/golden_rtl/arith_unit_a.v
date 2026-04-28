@@ -1,4 +1,4 @@
-module arith_unit (
+module arith_unit_a (
     input [7:0] a,
     input [7:0] b,
     output [7:0] sum,
@@ -6,5 +6,4 @@ module arith_unit (
 );
     assign sum = a + b;
     assign xor_out = a ^ b;
-
 endmodule
